@@ -22,7 +22,7 @@ fullnameOverride:
 ## ref: http://airflow.apache.org/docs/stable/executor/index.html
 ## valid values: ['SequentialExecutor', 'Local Executor', 'CeleryExecutor', 'KubernetesExecutor']
 ##
-executor: 'CeleryExecutor'
+executor: 'KubernetesExecutor'
 ## Name of an existing config map containing the Airflow config file
 ##
 configurationConfigMap:
@@ -31,7 +31,7 @@ configurationConfigMap:
 dagsConfigMap:
 ## Whether to load examples dags or not
 ##
-loadExamples: false
+loadExamples: true
 ## Authentication options
 ##
 auth:
@@ -228,7 +228,7 @@ scheduler:
     debug: false
   ## Number of scheduler replicas
   ##
-  replicaCount: 1
+  replicaCount: 3
   ## Override cmd
   ##
   command:
@@ -284,7 +284,7 @@ scheduler:
   ## ref: https://kubernetes.io/docs/tasks/run-application/configure-pdb/
   ##
   podDisruptionBudget:
-    enabled: false
+    enabled: false 
     minAvailable: 1
     # maxUnavailable: 1
   ## Add sidecars to the scheduler pods.
@@ -688,7 +688,7 @@ ldap:
 rbac:
   ## Specifies whether RBAC rules should be created
   ##
-  create: false
+  create: true
 
 ## Pods Service Account
 ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/
@@ -907,14 +907,14 @@ externalDatabase:
 ## https://github.com/bitnami/charts/blob/master/bitnami/redis/values.yaml
 ##
 redis:
-  enabled: true
+  enabled: false
   ## Cluster settings
   ##
-  cluster:
-    enabled: false
+  ## cluster:
+  ## enabled: false
   ## In case of redis.enabled = true, allow the usage of existing secrets for redis
   ##
-  existingSecret:
+  ## existingSecret:
   # password: ""
 
 externalRedis:
@@ -940,7 +940,7 @@ externalRedis:
 ## Prometheus Exporter / Metrics
 ##
 metrics:
-  enabled: false
+  enabled: true
 
   image:
     registry: docker.io
